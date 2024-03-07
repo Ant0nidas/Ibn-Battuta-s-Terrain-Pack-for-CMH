@@ -1,0 +1,47 @@
+﻿##CMH removed/added cultures as needed by list
+ccu_initialize_heritage_group_effect = {
+	if = { limit = { has_cultural_parameter = heritage_group_arabic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_arabic } }
+	if = { limit = { has_cultural_parameter = heritage_group_arctic_native_american } add_to_variable_list = { name = heritage_group target = flag:heritage_group_arctic_native_american } }
+	# if = { limit = { has_cultural_parameter = heritage_group_balto_finnic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_balto_finnic } }
+	# if = { limit = { has_cultural_parameter = heritage_group_balto_slavic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_balto_slavic } }
+	if = { limit = { has_cultural_parameter = heritage_group_berber } add_to_variable_list = { name = heritage_group target = flag:heritage_group_berber } }
+	# if = { limit = { has_cultural_parameter = heritage_group_burmese } add_to_variable_list = { name = heritage_group target = flag:heritage_group_burmese } }
+	if = { limit = { has_cultural_parameter = heritage_group_byzantine } add_to_variable_list = { name = heritage_group target = flag:heritage_group_byzantine } }
+	if = { limit = { has_cultural_parameter = heritage_group_celtic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_celtic } }
+	if = { limit = { has_cultural_parameter = heritage_group_central_african } add_to_variable_list = { name = heritage_group target = flag:heritage_group_central_african } }
+	if = { limit = { has_cultural_parameter = heritage_group_chinese } add_to_variable_list = { name = heritage_group target = flag:heritage_group_chinese } }
+	# if = { limit = { has_cultural_parameter = heritage_group_dravidian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_dravidian } }
+	if = { limit = { has_cultural_parameter = heritage_group_east_african } add_to_variable_list = { name = heritage_group target = flag:heritage_group_east_african } }
+	# if = { limit = { has_cultural_parameter = heritage_group_finno_ugric } add_to_variable_list = { name = heritage_group target = flag:heritage_group_finno_ugric } }
+	if = { limit = { has_cultural_parameter = heritage_group_germanic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_germanic } }
+	if = { limit = { has_cultural_parameter = heritage_group_indo_aryan } add_to_variable_list = { name = heritage_group target = flag:heritage_group_indo_aryan } }
+	if = { limit = { has_cultural_parameter = heritage_group_iranian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_iranian } }
+	if = { limit = { has_cultural_parameter = heritage_group_latin } add_to_variable_list = { name = heritage_group target = flag:heritage_group_latin } }
+	if = { limit = { has_cultural_parameter = heritage_group_levantine } add_to_variable_list = { name = heritage_group target = flag:heritage_group_levantine } }
+	# if = { limit = { has_cultural_parameter = heritage_group_mongolic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_mongolic } }
+	if = { limit = { has_cultural_parameter = heritage_group_northeast_native_american } add_to_variable_list = { name = heritage_group target = flag:heritage_group_northeast_native_american } }
+	if = { limit = { has_cultural_parameter = heritage_group_sahelian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_sahelian } } #CMH enabled
+	if = { limit = { has_cultural_parameter = heritage_group_siberian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_siberian } }
+	if = { limit = { has_cultural_parameter = heritage_group_tibeto_qiangic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_tibeto_qiangic } }
+	# if = { limit = { has_cultural_parameter = heritage_group_tocharian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_tocharian } }
+	# if = { limit = { has_cultural_parameter = heritage_group_turkic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_turkic } }
+	if = { limit = { has_cultural_parameter = heritage_group_ugro_permian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_ugro_permian } }
+	if = { limit = { has_cultural_parameter = heritage_group_volga_finnic } add_to_variable_list = { name = heritage_group target = flag:heritage_group_volga_finnic } }
+	if = { limit = { has_cultural_parameter = heritage_group_west_african } add_to_variable_list = { name = heritage_group target = flag:heritage_group_west_african } }
+	if = { limit = { has_cultural_parameter = heritage_group_fennoscandian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_fennoscandian } }
+	if = { limit = { has_cultural_parameter = heritage_group_balkan } add_to_variable_list = { name = heritage_group target = flag:heritage_group_balkan } }
+	if = { limit = { has_cultural_parameter = heritage_group_iberian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_iberian } }
+	if = { limit = { has_cultural_parameter = heritage_group_steppe } add_to_variable_list = { name = heritage_group target = flag:heritage_group_steppe } }
+	if = { limit = { has_cultural_parameter = heritage_group_north_african } add_to_variable_list = { name = heritage_group target = flag:heritage_group_north_african } }
+	if = { limit = { has_cultural_parameter = heritage_group_central_european } add_to_variable_list = { name = heritage_group target = flag:heritage_group_central_european } }
+	if = { limit = { has_cultural_parameter = heritage_group_eastern_european } add_to_variable_list = { name = heritage_group target = flag:heritage_group_eastern_european } }
+	if = { limit = { has_cultural_parameter = heritage_group_north_asian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_north_asian } }
+	if = { limit = { has_cultural_parameter = heritage_group_mon_khmer } add_to_variable_list = { name = heritage_group target = flag:heritage_group_mon_khmer } }
+	if = { limit = { has_cultural_parameter = heritage_group_kra_dai } add_to_variable_list = { name = heritage_group target = flag:heritage_group_kra_dai } }
+	if = { limit = { has_cultural_parameter = heritage_group_loloish } add_to_variable_list = { name = heritage_group target = flag:heritage_group_loloish } }
+	if = { limit = { has_cultural_parameter = heritage_group_austronesian } add_to_variable_list = { name = heritage_group target = flag:heritage_group_austronesian } }
+	if = { limit = { has_cultural_parameter = heritage_group_japanese } add_to_variable_list = { name = heritage_group target = flag:heritage_group_japanese } }
+	if = { limit = { has_cultural_parameter = heritage_group_korean } add_to_variable_list = { name = heritage_group target = flag:heritage_group_korean } }
+	if = { limit = { has_cultural_parameter = heritage_group_central_african } add_to_variable_list = { name = heritage_group target = flag:heritage_group_central_african } }
+	if = { limit = { has_cultural_parameter = heritage_group_south_african } add_to_variable_list = { name = heritage_group target = flag:heritage_group_south_african } }
+}
