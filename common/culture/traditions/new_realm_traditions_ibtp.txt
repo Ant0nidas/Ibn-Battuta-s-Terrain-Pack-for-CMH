@@ -1,5 +1,132 @@
 ﻿## Completely New Traditions ##
 
+tradition_ghazi = {
+	category = regional
+
+	layers = {
+		0 = martial
+		1 = mena
+		4 = dismounted_warrior.dds
+	}
+
+	is_shown = {
+		scope:character = {
+			has_religion = religion:islam_religion #You need to be Muslim
+		}
+	}
+
+	can_pick = {
+		NOT = {
+			scope:character = {
+				has_government = tribal_government
+			}
+		}
+
+		culture_not_pacifistic_trigger = yes
+
+		# Must have a significant cultural presence in the general Turanian area, i.e. the "frontier"
+		custom_tooltip = {
+			text = culture_on_western_frontier_desc
+			any_culture_county = {
+				percent >= 0.2
+				any_county_province = {
+					OR = {
+						geographical_region = ghw_region_anatolia
+						geographical_region = ghw_region_near_east
+						geographical_region = ghw_region_caucasus
+					}
+				}
+			}
+		}	
+	}
+
+	parameters = {
+		zealous_trait_more_common = yes
+		powerful_foreign_knights_find_you_attractive = yes
+		culture_can_raid_over_land_even_if_feudal_no_restrictions = yes
+		faith_warrior_traits_more_valued = yes
+	}
+
+	culture_modifier = {
+		mercenary_count_mult = 0.5
+	}
+	
+	province_modifier = {
+		
+	}
+	
+	character_modifier = {
+		mercenary_hire_cost_mult = -0.15
+		accolade_glory_gain_mult = 0.1
+		movement_speed = 0.05
+		ai_zeal = low_positive_ai_value
+		ai_boldness = very_low_positive_ai_value
+		ai_greed = very_low_positive_ai_value
+	}
+	
+	cost = {
+		prestige = {
+			# Base cost.
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			# Ethos requirement.
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_bellicose_or_stoic_desc
+				}
+			}
+			#Historical border cultures get a discount
+			if = {
+				limit = {
+					NOR = {
+						has_cultural_pillar = heritage_iranian
+						has_cultural_pillar = heritage_arabic
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = not_of_relevant_islamic_heritage_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+	
+	ai_will_do = { 
+		value = 100
+		if = {
+			limit = {
+				NOT = {
+					scope:character = {
+						any_sub_realm_county = {
+							percent >= 0.4
+							any_county_province = {
+								OR = {
+									geographical_region = ghw_region_anatolia
+									geographical_region = ghw_region_near_east
+									geographical_region = ghw_region_caucasus
+								}
+							}
+						}
+					}
+				}
+			}
+			multiply = 0
+		}
+	}
+}
+
 tradition_roman_pride = {
 	category = regional
 
@@ -81,6 +208,85 @@ tradition_roman_pride = {
 				add = {
 					value = tradition_unfulfilled_criteria_penalty
 					desc = byzantion_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = { value = 100 }
+}
+
+tradition_armenian_resilience = { # EXPERIMENTAL WIP
+	category = regional
+
+	layers = {
+		0 = diplo
+		1 = mediterranean
+		4 = speech.dds
+	}
+
+	is_shown = {
+		has_cultural_pillar = heritage_armenian
+	}
+
+	can_pick = {
+		NOR = { #Cant be taken by Cultures who favor massed troops or a variant
+			has_cultural_tradition = tradition_xenophilic
+			has_cultural_tradition = tradition_religion_blending
+			has_cultural_tradition = tradition_culture_blending
+		}
+		
+		NOT = { # Can not be picked by tribals
+			scope:character = {
+				has_government = tribal_government
+			}
+		}
+	}
+
+	parameters = {
+		monolithic_culture_feature = yes
+		zealous_trait_more_common = yes
+		stubborn_trait_more_common = yes
+		harder_to_convert_county_faith = yes
+		harder_to_convert_character_faith = yes
+		expensive_convert_to_local_culture = yes
+		harder_to_convert_county_culture_without_heritage = yes
+		added_character_boldness = yes
+	}
+
+	# culture_modifier = {
+	# 	cultural_acceptance_gain_mult = -0.3
+	# }
+	
+	province_modifier = {	
+	}
+	
+	character_modifier = {
+		opinion_of_different_faith = -15
+		faith_conversion_piety_cost_mult = 0.5
+		ai_zeal = 25
+		ai_boldness = 10
+	}
+	
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_courtly_or_communal_desc
 				}
 			}
 			
@@ -248,10 +454,14 @@ tradition_eastern_roman_law = {
 		tyranny_loss_mult = -0.5
 		vassal_limit = 50
 		title_creation_cost_mult = -0.5
+
+		ai_honor = 15
+		ai_rationality = 10
+		ai_compassion = 5
 	}
 	
 	county_modifier = {
-		monthly_county_control_change_add = 0.5
+		monthly_county_control_growth_add = 0.5
 	}
 	
 	cost = {
@@ -356,7 +566,7 @@ tradition_veche = {
     }    
 
 	county_modifier = {
-		monthly_county_control_change_factor = -0.15
+		monthly_county_control_growth_factor = -0.15
 		county_opinion_add = 20
 	}
 
@@ -817,6 +1027,8 @@ tradition_teulu = {
 		knight_effectiveness_mult = 0.5
 		knight_limit = 2
 		heavy_cavalry_max_size_add = 2
+
+		ai_honor = 5
 	} 
 
     cost = {
@@ -887,6 +1099,9 @@ tradition_barbary_corsairs = {
 		naval_movement_speed_mult = 0.25
 		coastal_advantage = 5
 		raid_speed = 0.5
+
+		ai_greed = 15
+		ai_boldness = 5
 	} 
 
     cost = {
@@ -996,6 +1211,9 @@ tradition_almogavars = {
 		movement_speed = 0.15
 		raid_speed = 0.25
 		max_loot_mult = 0.5
+
+		ai_greed = 10
+		ai_boldness = 10
 	} 
 
     cost = {
@@ -1683,6 +1901,9 @@ tradition_akritai = {
         defender_advantage = 5
 		retreat_losses = -0.15
 		hard_casualty_modifier = -0.15
+
+		ai_rationality = 10
+		ai_boldness = -5
     }    
 
 	county_modifier = {
@@ -1839,7 +2060,10 @@ tradition_eyres = {
     character_modifier = {
 		vassal_opinion = -5
 		vassal_tax_contribution_mult = 0.15
-		monthly_county_control_change_factor = 0.2
+		monthly_county_control_growth_factor = 0.2
+
+		ai_honor = 10
+		ai_rationality = 5
     }    
 
 	county_modifier = {
@@ -1939,10 +2163,13 @@ tradition_assizes_ariano = {
 		ignore_negative_opinion_of_culture = yes
 		title_creation_cost_mult = -0.40
 		vassal_limit = 40
+
+		ai_honor = 15
+		ai_rationality = 10
 	}
 
 	county_modifier = {
-		monthly_county_control_change_factor = 0.5
+		monthly_county_control_growth_factor = 0.35
 	}
 
     cost = {
@@ -2039,11 +2266,14 @@ tradition_pravda_russkaya = {
 		title_creation_cost_mult = -0.25
 		vassal_limit = 20
 		tyranny_gain_mult = 0.25
+
+		ai_honor = 10
+		ai_rationality = 5
 	}
 
 	county_modifier = {
 		county_opinion_add = 10
-		monthly_county_control_change_add = 0.3
+		monthly_county_control_growth_add = 0.3
 	}
 
     cost = {
@@ -2154,11 +2384,14 @@ tradition_outremer_armies = {
 	
     character_modifier = {
         tolerance_advantage_mod = 5
+
+		ai_zeal = 15
+		ai_boldness = 10
     }
 
 	county_modifier = {
 		county_opinion_add = 10
-		monthly_county_control_change_factor = 0.25
+		monthly_county_control_growth_factor = 0.25
 	}
 
     cost = {
@@ -2297,7 +2530,7 @@ tradition_exechequer = {
     }
 
 	county_modifier = {
-		monthly_county_control_change_factor = 0.2
+		monthly_county_control_growth_factor = 0.2
 		tax_mult = 0.15
 		levy_size = 0.15
 	}
@@ -2481,6 +2714,9 @@ tradition_islamic_furusiyya = {
 		heavy_cavalry_toughness_mult = 0.1
 		archer_cavalry_damage_mult = 0.1
 		archer_cavalry_toughness_mult = 0.1
+
+		ai_honor = 15
+		ai_boldness = 10
 	}
 	
 	cost = {
@@ -2664,6 +2900,8 @@ tradition_professional_army = {
 		men_at_arms_maintenance = -0.15
 		men_at_arms_limit = 5
 		men_at_arms_cap = 3
+
+		ai_rationality = 5
 	}
 	
 	cost = {
@@ -2842,6 +3080,8 @@ tradition_military_engineering = {
         pikemen_siege_value_add = 0.1
         archers_siege_value_add = 0.1
         skirmishers_siege_value_add = 0.1
+
+		ai_rationality = 10
     }
 
     cost = {
@@ -2936,13 +3176,13 @@ tradition_fierce_independence = {
 	}
 	
 	character_modifier = {
-		monthly_county_control_change_factor = 0.25
+		monthly_county_control_growth_factor = 0.25
 		ignore_negative_opinion_of_culture = yes
 		ai_boldness = 10
 	}
 	
 	county_modifier = {
-		monthly_county_control_change_factor = -0.5
+		monthly_county_control_decline_factor = 0.5
 	}
 	
 	cost = {
@@ -3146,7 +3386,7 @@ tradition_merc_armies = {
 		levy_size = -0.25
 		levy_reinforcement_rate = -0.25
 		vassal_levy_contribution_mult = -0.25
-		monthly_county_control_change_factor = -0.2
+		monthly_county_control_decline_factor = 0.2
 	}
 	
     cost = {
@@ -3240,6 +3480,7 @@ tradition_norman_traditions = {
 		heavy_cavalry_recruitment_cost_mult = -0.25	
 		heavy_cavalry_maintenance_mult = -0.2
 		embarkation_cost_mult = -0.25	
+		ai_greed = 10
 		ai_boldness = 10		
 		ai_war_chance = 0.05
 		ai_war_cooldown = -0.05		
@@ -3262,6 +3503,96 @@ tradition_norman_traditions = {
 				add = {
 					value = tradition_incompatible_ethos_penalty
 					desc = not_courtly_or_communal_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = { value = 100 }
+}
+
+tradition_tabari_isolation = {
+	category = regional
+
+	layers = {
+		0 = steward
+ 		1 = mena
+ 		4 = fierce_independence.dds
+	}
+
+	is_shown = {
+		NOT = { has_cultural_tradition = tradition_forest_folk }
+		NOT = { has_cultural_tradition = tradition_hill_dwellers }
+		NOT = { has_cultural_tradition = tradition_mountain_homes }
+		has_cultural_pillar = heritage_iranian
+		OR = {
+ 			this = culture:mazandarani
+			this = culture:gilani
+			this = culture:taleshi
+			this = culture:daylamite
+ 			any_parent_culture_or_above = {
+ 				this = culture:mazandarani
+				this = culture:gilani
+				this = culture:taleshi
+				this = culture:daylamite
+ 			}
+		}
+	}
+
+	can_pick = {
+		NOR = { #Cant be taken if already isolationist or outwards looking
+			has_cultural_tradition = tradition_religion_blending
+			has_cultural_tradition = tradition_culture_blending
+			has_cultural_tradition = tradition_xenophilic
+			has_cultural_tradition = tradition_isolationist
+		}
+	}
+
+	parameters = {
+		monolithic_culture_feature = yes
+		harder_to_hybridize = yes
+		harder_to_convert_county_culture_without_heritage = yes
+		logging_camps_building_bonuses = yes
+		mountains_hunt_success_chance = yes
+	}
+
+	culture_modifier = {
+		cultural_acceptance_gain_mult = -0.1
+	}
+	
+	county_modifier = {
+		monthly_county_control_decline_factor = 0.15
+	}
+	
+	character_modifier = {
+		different_culture_opinion = -5
+		opinion_of_liege = -10
+		forest_advantage = 2
+		forest_travel_danger = -30
+		mountains_advantage = 2
+		mountains_travel_danger = -20
+		ai_boldness = 10
+	}
+	
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_stoic_or_communal_desc
 				}
 			}
 			
