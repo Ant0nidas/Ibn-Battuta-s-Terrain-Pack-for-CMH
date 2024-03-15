@@ -73,8 +73,8 @@ tradition_byzantine_succession = {
 			}
 			if = {
 				limit = {
-					scope:character = {
 						NOT = {
+						scope:character = {
 							has_title = title:c_byzantion
 						}
 					}
@@ -795,6 +795,7 @@ tradition_agrarian = {
 	}
 	
 	parameters = {
+		diligent_trait_more_common = yes
 		content_trait_more_common = yes
 		martial_education_worse_outcomes = yes
 		hard_working_traits_more_valued = yes
@@ -803,6 +804,7 @@ tradition_agrarian = {
 	character_modifier = {
 		men_at_arms_recruitment_cost = 0.25
 		prowess = -2
+		floodplains_travel_danger = floodplains_medium_danger_reduction
 	}
 	
 	county_modifier = {
@@ -918,7 +920,7 @@ tradition_quarrelsome = {
 		disloyal_trait_more_common = yes
 	}
 	character_modifier = {
-		monthly_county_control_change_factor = -0.4
+		monthly_county_control_decline_factor = 0.4
 		
 		ai_boldness = 25
 		ai_honor = -20

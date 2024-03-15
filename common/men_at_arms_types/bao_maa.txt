@@ -12,7 +12,7 @@ marc_hegion = {
 		}
 	}
 	
-	damage = 65
+	damage = 115 # 65
 	toughness = 20
 	pursuit = 20
 	screen = 15
